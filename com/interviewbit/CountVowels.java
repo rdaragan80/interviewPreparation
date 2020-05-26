@@ -1,10 +1,11 @@
 package com.interviewbit;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 
-public class CountVovels {
+public class CountVowels {
 
 	public static int getMaxVowelsInSubstring(String s, int k) {
 		if (k > s.length()) {
@@ -41,11 +42,17 @@ public class CountVovels {
 		return max;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		System.out.println("large string - " + getMaxVowelsInSubstring(getStringFromFile(), 20_000));
 		System.out.println("abciiidef - " + getMaxVowelsInSubstring("abciiidef", 3));
 		System.out.println("aeiou - " + getMaxVowelsInSubstring("aeiou", 2));
 		System.out.println("leetcode - " + getMaxVowelsInSubstring("leetcode", 3));
 		System.out.println("rhythms - " + getMaxVowelsInSubstring("rhythms", 4));
 		System.out.println("tryhard - " + getMaxVowelsInSubstring("tryhard", 4));
+	}
+
+	private static String getStringFromFile() throws Exception {
+		Path path = Paths.get(CountVowels.class.getResource("CountVowelsLargeInput.txt").toURI());
+		return Files.readAllLines(path).get(0);
 	}
 }
